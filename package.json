@@ -5,6 +5,7 @@
   "scripts": {
     "build-env": "node generate-env.js",
     "build": "npm run build-env",
+    "vercel-build": "npm run build-env",
     "start": "npx serve . -s",
     "dev": "vercel dev",
     "test:supabase": "node test-supabase.js",
