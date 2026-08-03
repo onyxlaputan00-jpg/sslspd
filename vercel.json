@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "index.html", "use": "@vercel/static" },
+    { "src": "public/fbi-logo.png", "use": "@vercel/static" },
+    { "src": "public/fbi-logo.svg", "use": "@vercel/static" },
+    { "src": "api/**/*.js", "use": "@vercel/node" }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "/api/$1.js" },
+    { "src": "/fbi-logo.png", "dest": "/public/fbi-logo.png" },
+    { "src": "/fbi-logo.svg", "dest": "/public/fbi-logo.svg" },
+    { "handle": "filesystem" },
+    { "src": "/(.*)", "dest": "/index.html" }
+  ]
+}
