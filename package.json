@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
+    "build-env": "node generate-env.js",
+    "build": "npm run build-env",
     "start": "npx serve . -s",
     "dev": "vercel dev",
     "test:supabase": "node test-supabase.js",
     "lint": "echo \"No linter configured\""
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.35.0",
-    "pg": "^8.11.2"
+    "@supabase/supabase-js": "^2.35.0"
   }
 }

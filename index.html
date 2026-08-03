@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Supabase Official JS Library CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="/env.js"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -374,14 +375,13 @@
 
     async function initSupabase() {
         try {
-            const response = await fetch('/api/config');
-            const config = await response.json();
+            const config = window.__ENV__ || {};
 
-            if (!config.supabaseUrl || !config.supabaseKey) {
-                throw new Error('Missing Supabase config');
+            if (!config.SUPABASE_URL || !config.SUPABASE_KEY) {
+                throw new Error('Missing Supabase config. Set SUPABASE_URL and SUPABASE_KEY in Vercel.');
             }
 
-            supabaseClient = supabase.createClient(config.supabaseUrl, config.supabaseKey);
+            supabaseClient = supabase.createClient(config.SUPABASE_URL, config.SUPABASE_KEY);
             isSupabaseReady = true;
 
             console.log('Supabase READY');
@@ -658,33 +658,7 @@
 
     // Add new news editor (limited admin)
     async function addAdminUser(email, password) {
-        if (!supabaseClient) return;
-        try {
-            // Get current user's session
-            const { data: { session }, error: sessionError } = await supabaseClient.auth.getSession();
-            if (sessionError || !session) return alert('You must be logged in to create users.');
-
-            // Call backend API to create user
-            const response = await fetch('/api/create-user', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    email: email.toLowerCase(),
-                    password: password,
-                    authToken: session.access_token
-                })
-            });
-
-            const result = await response.json();
-            if (!response.ok) return alert(`Error: ${result.error}`);
-            
-            alert(`News Editor created: ${email}\nThey can now log in and publish articles.`);
-            document.getElementById('new-user-email').value = '';
-            document.getElementById('new-user-password').value = '';
-            loadAdminUsers();
-        } catch (err) {
-            alert(`Error: ${err.message}`);
-        }
+        alert('User creation is disabled in this deployment mode. Use the Supabase dashboard to add new admin users.');
     }
 
     // Delete admin user
