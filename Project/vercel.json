@@ -9,6 +9,7 @@
   "routes": [
     { "src": "/api/config", "dest": "/api/config.js" },
     { "src": "/api/create-user", "dest": "/api/create-user.js" },
+    { "src": "/api/setup-db", "dest": "/api/setup-db.js" },
     { "src": "/fbi-logo.png", "dest": "/public/fbi-logo.png" },
     { "src": "/fbi-logo.svg", "dest": "/public/fbi-logo.svg" },
     { "handle": "filesystem" },

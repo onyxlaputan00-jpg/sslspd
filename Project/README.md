@@ -30,6 +30,7 @@ python -m http.server 8000
 
 Notes:
 - Ensure `SUPABASE_URL` and `SUPABASE_KEY` are set in your hosting environment so `/api/config` returns them.
+- For database setup in Vercel, add `SUPABASE_DB_URL` (or `DATABASE_URL` / `POSTGRES_URL`) and call `/api/setup-db` once after deployment.
 - Use the `.env.example` as a template for local environment variables.
 
 Node test script
